@@ -1,3 +1,4 @@
+import 'package:clean_architecture/core/utils/enums.dart';
 import 'package:clean_architecture/movies/presentation/controller/movies_bloc.dart';
 import 'package:clean_architecture/movies/presentation/controller/movies_state.dart';
 import 'package:flutter/material.dart';
@@ -13,8 +14,18 @@ class TopRatedComponent extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return BlocBuilder<MoviesBloc, MoviesState>(
+      buildWhen: (previous, current) => previous.topRatedState != current.topRatedState,
       builder: (context, state) {
-        return FadeIn(
+        switch(state.topRatedState) {
+          case RequestsState.loading:
+           return SizedBox(
+              height: 400,
+              child: Center(
+                child: CircularProgressIndicator(
+              ))
+            );
+          case RequestsState.loaded:
+                   return FadeIn(
           duration: const Duration(milliseconds: 500),
           child: SizedBox(
             height: 170.0,
@@ -61,6 +72,15 @@ class TopRatedComponent extends StatelessWidget {
             ),
           ),
         );
+          case RequestsState.error:
+              return SizedBox(
+              height: 400,
+              child: Center(
+                child: Text(state.nowPlayingMessage),
+              ),
+            );
+        }
+
       },
     );
   }

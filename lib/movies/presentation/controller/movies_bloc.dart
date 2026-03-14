@@ -1,3 +1,5 @@
+import 'dart:async';
+
 import 'package:clean_architecture/core/utils/enums.dart';
 import 'package:clean_architecture/movies/domain/use_case/get_now_playing_movies_use_case.dart';
 import 'package:clean_architecture/movies/domain/use_case/get_popular_movies_use_case.dart';
@@ -16,8 +18,15 @@ class MoviesBloc extends Bloc<MoviesEvent, MoviesState> {
     this.getPopularMoviesUseCase,
     this.getTopRatedMoviesUseCase,
   ) : super(const MoviesState()) {
-    on<GetNowPlayingMoviesEvent>((event, emit) async {
-      final result = await getNowPlayingMoviesUseCase.execute();
+    on<GetNowPlayingMoviesEvent>(_getNowPlayingMovies);
+
+    on<GetPopularMoviesEvent>(_getPopularMovies);
+
+    on<GetTopRatedMoviesEvent>(_getTopRatedMovies);
+  }
+
+  FutureOr<void> _getNowPlayingMovies(GetNowPlayingMoviesEvent event, Emitter<MoviesState> emit) async{
+     final result = await getNowPlayingMoviesUseCase.execute();
       result.fold(
         (l) => emit(
           state.copyWith(
@@ -32,9 +41,9 @@ class MoviesBloc extends Bloc<MoviesEvent, MoviesState> {
           ),
         ),
       );
-    });
+  }
 
-    on<GetPopularMoviesEvent>((event, emit) async {
+  FutureOr<void> _getPopularMovies(GetPopularMoviesEvent event, Emitter<MoviesState> emit) async{
       final result = await getPopularMoviesUseCase.execute();
 
       result.fold(
@@ -48,10 +57,10 @@ class MoviesBloc extends Bloc<MoviesEvent, MoviesState> {
           state.copyWith(popularMovies: r, popularState: RequestsState.loaded),
         ),
       );
-    });
+  }
 
-    on<GetTopRatedMoviesEvent>((event, emit) async {
-      final result = await getTopRatedMoviesUseCase.execute();
+  FutureOr<void> _getTopRatedMovies(GetTopRatedMoviesEvent event, Emitter<MoviesState> emit)async {
+     final result = await getTopRatedMoviesUseCase.execute();
 
       result.fold(
         (l) => emit(
@@ -67,6 +76,5 @@ class MoviesBloc extends Bloc<MoviesEvent, MoviesState> {
           ),
         ),
       );
-    });
   }
 }
