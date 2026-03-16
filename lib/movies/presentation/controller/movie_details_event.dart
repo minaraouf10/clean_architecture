@@ -1,0 +1,24 @@
+part of 'movie_details_bloc.dart';
+
+@immutable
+sealed class MovieDetailsEvent extends Equatable {
+  const MovieDetailsEvent();
+}
+
+class GetMovieDetailsEvent extends MovieDetailsEvent {
+  final int id;
+
+  const GetMovieDetailsEvent({required this.id});
+
+  @override
+  List<Object> get props => [id];
+}
+
+class MovieRecommendationEvent extends MovieDetailsEvent{
+  final int id;
+
+  const MovieRecommendationEvent({required this.id});
+
+  @override
+  List<Object> get props => [];
+}
