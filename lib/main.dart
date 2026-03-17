@@ -1,4 +1,5 @@
 import 'package:clean_architecture/core/services/services_locator.dart';
+import 'package:clean_architecture/core/utils/app_strings.dart';
 import 'package:clean_architecture/movies/presentation/screens/movies_screen.dart';
 import 'package:flutter/material.dart';
 
@@ -14,7 +15,7 @@ class MyApp extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return MaterialApp(
-      title: 'Movies App',
+      title: AppStrings.appName,
       theme: ThemeData.dark().copyWith(
         scaffoldBackgroundColor:Colors.grey.shade900 ,
        // colorScheme: ColorScheme.fromSeed(seedColor: Colors.deepPurple),

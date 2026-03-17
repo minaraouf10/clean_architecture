@@ -1,4 +1,5 @@
 import 'package:clean_architecture/core/services/services_locator.dart';
+import 'package:clean_architecture/core/utils/app_strings.dart';
 import 'package:clean_architecture/movies/presentation/components/now_playing_component.dart';
 import 'package:clean_architecture/movies/presentation/components/popular_component.dart';
 import 'package:clean_architecture/movies/presentation/components/top_rated_component.dart';
@@ -32,7 +33,7 @@ class MoviesScreen extends StatelessWidget {
                   mainAxisAlignment: MainAxisAlignment.spaceBetween,
                   children: [
                     Text(
-                      "Popular",
+                      AppStrings.popular,
                       style: GoogleFonts.poppins(
                         fontSize: 19,
                         fontWeight: FontWeight.w500,
@@ -49,7 +50,7 @@ class MoviesScreen extends StatelessWidget {
                         child: Row(
                           children: const [
                             Text(
-                              'See More',
+                              AppStrings.seeMore,
                               style: TextStyle(color: Colors.white),
                             ),
                             Icon(Icons.arrow_forward_ios, size: 16.0),
@@ -67,7 +68,7 @@ class MoviesScreen extends StatelessWidget {
                   mainAxisAlignment: MainAxisAlignment.spaceBetween,
                   children: [
                     Text(
-                      "Top Rated",
+                      AppStrings.topRated,
                       style: GoogleFonts.poppins(
                         fontSize: 19,
                         fontWeight: FontWeight.w500,
@@ -84,7 +85,7 @@ class MoviesScreen extends StatelessWidget {
                         child: Row(
                           children: const [
                             Text(
-                              'See More',
+                              AppStrings.seeMore,
                               style: TextStyle(color: Colors.white),
                             ),
                             Icon(Icons.arrow_forward_ios, size: 16.0),
