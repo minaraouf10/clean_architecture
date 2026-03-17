@@ -1,13 +1,12 @@
 import 'dart:async';
 
-import 'package:bloc/bloc.dart';
 import 'package:clean_architecture/core/utils/enums.dart';
 import 'package:clean_architecture/movies/domain/entities/movie_detail.dart';
 import 'package:clean_architecture/movies/domain/entities/recommendation.dart';
 import 'package:clean_architecture/movies/domain/use_case/get_movie_detalis_usecase.dart';
 import 'package:clean_architecture/movies/domain/use_case/get_recommendation_use_case.dart';
 import 'package:equatable/equatable.dart';
-import 'package:meta/meta.dart';
+import 'package:flutter_bloc/flutter_bloc.dart';
 
 part 'movie_details_event.dart';
 
