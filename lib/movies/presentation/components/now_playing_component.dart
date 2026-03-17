@@ -5,6 +5,7 @@ import 'package:clean_architecture/core/network/api_constance.dart';
 import 'package:clean_architecture/core/utils/enums.dart';
 import 'package:clean_architecture/movies/presentation/controller/movies_bloc.dart';
 import 'package:clean_architecture/movies/presentation/controller/movies_state.dart';
+import 'package:clean_architecture/movies/presentation/screens/movie_detail_screen.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 
@@ -14,15 +15,14 @@ class NowPlayingComponent extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return BlocBuilder<MoviesBloc, MoviesState>(
-      buildWhen: (previous, current) => previous.nowPlayingState != current.nowPlayingState,
+      buildWhen: (previous, current) =>
+          previous.nowPlayingState != current.nowPlayingState,
       builder: (context, state) {
         switch (state.nowPlayingState) {
           case RequestsState.loading:
             return SizedBox(
               height: 400,
-              child: Center(
-                child: CircularProgressIndicator(
-              ))
+              child: Center(child: CircularProgressIndicator()),
             );
           case RequestsState.loaded:
             return FadeIn(
@@ -37,7 +37,13 @@ class NowPlayingComponent extends StatelessWidget {
                   return GestureDetector(
                     key: const Key('openMovieMinimalDetail'),
                     onTap: () {
-                      /// TODO : NAVIGATE TO MOVIE DETAILS
+                      Navigator.push(
+                        context,
+                        MaterialPageRoute(
+                          builder: (BuildContext context) =>
+                              MovieDetailScreen(id: item.id),
+                        ),
+                      );
                     },
                     child: Stack(
                       children: [
@@ -114,9 +120,7 @@ class NowPlayingComponent extends StatelessWidget {
           case RequestsState.error:
             return SizedBox(
               height: 400,
-              child: Center(
-                child: Text(state.nowPlayingMessage),
-              ),
+              child: Center(child: Text(state.nowPlayingMessage)),
             );
         }
       },
